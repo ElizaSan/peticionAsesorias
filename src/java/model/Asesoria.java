@@ -1,85 +1,86 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package model;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+public class Asesoria {
+    private int idAsesoria;
+    private String matricula;
+    private int idProfesor;
+    private int idAsignatura;
+    private String fecha;        // Formato: "YYYY-MM-DD"
+    private String hora;         // Formato: "HH:MM"
+    private String asunto;
+    private boolean alumnoEsProfesor;
+    private String status;       // en_proceso, aceptada, denegada
+    private String comentarioProfesor;
 
-/**
- *
- * @author mimas
- */
-public class Asesoria extends HttpServlet {
+    public Asesoria() {}
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Asesoria</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Asesoria at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    public int getIdAsesoria() {
+        return idAsesoria;
+    }
+    public void setIdAsesoria(int idAsesoria) {
+        this.idAsesoria = idAsesoria;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    public String getMatricula() {
+        return matricula;
+    }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    public int getIdAsignatura() {
+        return idAsignatura;
+    }
+    public void setIdAsignatura(int idAsignatura) {
+        this.idAsignatura = idAsignatura;
+    }
 
+    public String getFecha() {
+        return fecha;
+    }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getAsunto() {
+        return asunto;
+    }
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+    public boolean isAlumnoEsProfesor() {
+        return alumnoEsProfesor;
+    }
+    public void setAlumnoEsProfesor(boolean alumnoEsProfesor) {
+        this.alumnoEsProfesor = alumnoEsProfesor;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getComentarioProfesor() {
+        return comentarioProfesor;
+    }
+    public void setComentarioProfesor(String comentarioProfesor) {
+        this.comentarioProfesor = comentarioProfesor;
+    }
 }

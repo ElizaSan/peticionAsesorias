@@ -48,6 +48,22 @@
         <servlet-name>AsesoriaDAO</servlet-name>
         <servlet-class>model.DAO.AsesoriaDAO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MisSolicitudesServlet</servlet-name>
+        <servlet-class>controller.MisSolicitudesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudesProfesorServlet</servlet-name>
+        <servlet-class>controller.SolicitudesProfesorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResponderSolicitudServlet</servlet-name>
+        <servlet-class>controller.ResponderSolicitudServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SolicitudServlet</servlet-name>
+        <servlet-class>controller.SolicitudServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
@@ -95,6 +111,22 @@
     <servlet-mapping>
         <servlet-name>AsesoriaDAO</servlet-name>
         <url-pattern>/AsesoriaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MisSolicitudesServlet</servlet-name>
+        <url-pattern>/MisSolicitudesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudesProfesorServlet</servlet-name>
+        <url-pattern>/SolicitudesProfesorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResponderSolicitudServlet</servlet-name>
+        <url-pattern>/ResponderSolicitudServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SolicitudServlet</servlet-name>
+        <url-pattern>/SolicitudServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

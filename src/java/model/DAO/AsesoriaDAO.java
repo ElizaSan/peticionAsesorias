@@ -1,85 +1,99 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package model.DAO;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import model.Asesoria;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author mimas
- */
-public class AsesoriaDAO extends HttpServlet {
+public class AsesoriaDAO {
+    private final String jdbcURL = "jdbc:mysql://localhost:3306/peticionAsesorias?useSSL=false&serverTimezone=UTC";
+    private final String jdbcUser = "root";
+    private final String jdbcPassword = "";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AsesoriaDAO</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AsesoriaDAO at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    private static final String INSERT_SQL = "INSERT INTO Asesoria "
+        + "(matricula, idProfesor, idAsignatura, fecha, hora, asunto, alumnoEsProfesor, status, comentarioProfesor) "
+        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // Insertar nueva asesoría
+    public void insertAsesoria(Asesoria asesoria) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
+
+            stmt.setString(1, asesoria.getMatricula());
+            stmt.setInt(2, asesoria.getIdProfesor());
+            stmt.setInt(3, asesoria.getIdAsignatura());
+            stmt.setDate(4, Date.valueOf(asesoria.getFecha()));
+            stmt.setTime(5, Time.valueOf(asesoria.getHora() + ":00"));
+            stmt.setString(6, asesoria.getAsunto());
+            stmt.setBoolean(7, asesoria.isAlumnoEsProfesor());
+            stmt.setString(8, asesoria.getStatus());
+            stmt.setString(9, asesoria.getComentarioProfesor());
+
+            stmt.executeUpdate();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Obtener asesorías de un alumno por matrícula
+    public List<Asesoria> getAsesoriasByAlumno(String matricula) throws SQLException {
+        List<Asesoria> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Asesoria WHERE matricula = ?";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, matricula);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Asesoria a = new Asesoria();
+                a.setIdAsesoria(rs.getInt("idAsesoria"));
+                a.setMatricula(rs.getString("matricula"));
+                a.setIdProfesor(rs.getInt("idProfesor"));
+                a.setIdAsignatura(rs.getInt("idAsignatura"));
+                a.setFecha(rs.getDate("fecha").toString());
+                a.setHora(rs.getTime("hora").toString().substring(0,5));
+                a.setAsunto(rs.getString("asunto"));
+                a.setAlumnoEsProfesor(rs.getBoolean("alumnoEsProfesor"));
+                a.setStatus(rs.getString("status"));
+                a.setComentarioProfesor(rs.getString("comentarioProfesor"));
+                lista.add(a);
+            }
+        }
+        return lista;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Obtener asesorías asignadas a un profesor por idProfesor
+    public List<Asesoria> getAsesoriasByProfesor(int idProfesor) throws SQLException {
+        List<Asesoria> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Asesoria WHERE idProfesor = ?";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idProfesor);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Asesoria a = new Asesoria();
+                a.setIdAsesoria(rs.getInt("idAsesoria"));
+                a.setMatricula(rs.getString("matricula"));
+                a.setIdProfesor(rs.getInt("idProfesor"));
+                a.setIdAsignatura(rs.getInt("idAsignatura"));
+                a.setFecha(rs.getDate("fecha").toString());
+                a.setHora(rs.getTime("hora").toString().substring(0,5));
+                a.setAsunto(rs.getString("asunto"));
+                a.setAlumnoEsProfesor(rs.getBoolean("alumnoEsProfesor"));
+                a.setStatus(rs.getString("status"));
+                a.setComentarioProfesor(rs.getString("comentarioProfesor"));
+                lista.add(a);
+            }
+        }
+        return lista;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    // Actualizar status y comentario de asesoría
+    public void actualizarStatusComentario(int idAsesoria, String status, String comentario) throws SQLException {
+        String sql = "UPDATE Asesoria SET status = ?, comentarioProfesor = ? WHERE idAsesoria = ?";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setString(2, comentario);
+            stmt.setInt(3, idAsesoria);
+            stmt.executeUpdate();
+        }
+    }
 }

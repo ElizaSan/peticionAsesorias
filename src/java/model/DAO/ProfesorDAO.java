@@ -1,85 +1,64 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package model.DAO;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import model.Profesor;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author mimas
- */
-public class ProfesorDAO extends HttpServlet {
+public class ProfesorDAO {
+    private final String jdbcURL = "jdbc:mysql://localhost:3306/peticionAsesorias?useSSL=false&serverTimezone=UTC";
+    private final String jdbcUser = "root";
+    private final String jdbcPassword = "";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProfesorDAO</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProfesorDAO at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    // Insertar profesor
+    public void insertProfesor(Profesor profesor) throws SQLException {
+        String sql = "INSERT INTO Profesor (nombreCompleto, password) VALUES (?, ?)";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, profesor.getNombreCompleto());
+            stmt.setString(2, profesor.getPassword());
+            stmt.executeUpdate();
+            // Obtener id generado
+            ResultSet keys = stmt.getGeneratedKeys();
+            if (keys.next()) {
+                profesor.setIdProfesor(keys.getInt(1));
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Obtener profesor por id
+    public Profesor getProfesorById(int idProfesor) throws SQLException {
+        String sql = "SELECT * FROM Profesor WHERE idProfesor = ?";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idProfesor);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Profesor profesor = new Profesor();
+                profesor.setIdProfesor(rs.getInt("idProfesor"));
+                profesor.setNombreCompleto(rs.getString("nombreCompleto"));
+                profesor.setPassword(rs.getString("password"));
+                return profesor;
+            }
+        }
+        return null;
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    // Listar todos los profesores
+    public List<Profesor> getAllProfesores() throws SQLException {
+        List<Profesor> profesores = new ArrayList<>();
+        String sql = "SELECT * FROM Profesor";
+        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Profesor profesor = new Profesor();
+                profesor.setIdProfesor(rs.getInt("idProfesor"));
+                profesor.setNombreCompleto(rs.getString("nombreCompleto"));
+                profesor.setPassword(rs.getString("password"));
+                profesores.add(profesor);
+            }
+        }
+        return profesores;
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

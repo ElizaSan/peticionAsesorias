@@ -1,9 +1,3 @@
-<%-- 
-    Document   : footer
-    Created on : May 15, 2025, 6:20:31 PM
-    Author     : mimas
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +6,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <footer style="background:#ddd; padding:10px; margin-top:20px; text-align:center;">
+  <p>© 2025 Petición de Asesorías - Universidad</p>
+</footer>
     </body>
 </html>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : header
-    Created on : May 15, 2025, 6:20:23 PM
-    Author     : mimas
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +6,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <header style="background:#ddd; padding:10px; margin-bottom:20px;">
+        <h1>Petición de Asesorías</h1>
+        <nav>
+          <a href="<%= request.getContextPath() %>/index.jsp">Inicio</a>
+        </nav>
+      </header>
     </body>
 </html>
