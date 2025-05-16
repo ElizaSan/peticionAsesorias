@@ -22,11 +22,7 @@ public class SolicitudesProfesorServlet extends HttpServlet {
         asesoriaDAO = new AsesoriaDAO();
     }
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
+   
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,7 +49,7 @@ public class SolicitudesProfesorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     
