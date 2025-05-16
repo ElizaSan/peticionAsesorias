@@ -7,9 +7,7 @@
         <link rel="stylesheet" href="css/styles.css" />
     </head>
     <body>
-        <header>
-        <h1>Petición de Asesorías</h1>
-        </header>
+        <jsp:include page="../common/header.jsp" />
 
       <nav>
         <!-- Links a login de alumno y profesor -->
@@ -32,9 +30,7 @@
         <p>Información adicional o anuncios</p>
       </aside>
 
-      <footer>
-        <p>© 2025 Petición de Asesorías - Universidad</p>
-      </footer>
+      <jsp:include page="../common/footer.jsp" />
     </body>
         
 </html>

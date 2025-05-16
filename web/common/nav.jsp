@@ -1,8 +1,3 @@
-<%-- 
-    Document   : nav
-    Created on : May 15, 2025, 6:20:37 PM
-    Author     : mimas
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

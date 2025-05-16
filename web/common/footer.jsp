@@ -7,7 +7,7 @@
     </head>
     <body>
         <footer style="background:#ddd; padding:10px; margin-top:20px; text-align:center;">
-  <p>© 2025 Petición de Asesorías - Universidad</p>
-</footer>
+            <p>© 2025 Petición de Asesorías - Universidad</p>
+        </footer>
     </body>
 </html>

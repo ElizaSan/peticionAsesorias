@@ -19,8 +19,9 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <header><h1>Solicitud de Asesoría</h1></header>
-
+        <jsp:include page="../common/header.jsp" />
+        
+        <h1>Formato de solicitud de asesoría</h1>
         <form action="${pageContext.request.contextPath}/SolicitudServlet" method="post">
           <label>Nombre Completo:</label><br/>
           <input type="text" name="nombreCompleto" required /><br/><br/>
@@ -65,6 +66,6 @@
           <button type="submit">Enviar Solicitud</button>
         </form>
 
-        <footer><p>© 2025 Petición de Asesorías</p></footer>
+        <jsp:include page="../common/footer.jsp" />
     </body>
 </html>

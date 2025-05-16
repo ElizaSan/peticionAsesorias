@@ -1,19 +1,17 @@
 package model.DAO;
 
+import utils.ConexionBD;
 import model.Alumno;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AlumnoDAO {
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/peticionAsesorias?useSSL=false&serverTimezone=UTC";
-    private final String jdbcUser = "root";
-    private final String jdbcPassword = "";
-
+    
     // Insertar alumno
     public void insertAlumno(Alumno alumno) throws SQLException {
         String sql = "INSERT INTO Alumno (matricula, nombreCompleto, programaEducativo, password) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, alumno.getMatricula());
             stmt.setString(2, alumno.getNombreCompleto());
@@ -26,7 +24,7 @@ public class AlumnoDAO {
     // Obtener alumno por matricula
     public Alumno getAlumnoByMatricula(String matricula) throws SQLException {
         String sql = "SELECT * FROM Alumno WHERE matricula = ?";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, matricula);
             ResultSet rs = stmt.executeQuery();
@@ -46,7 +44,7 @@ public class AlumnoDAO {
     public List<Alumno> getAllAlumnos() throws SQLException {
         List<Alumno> alumnos = new ArrayList<>();
         String sql = "SELECT * FROM Alumno";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

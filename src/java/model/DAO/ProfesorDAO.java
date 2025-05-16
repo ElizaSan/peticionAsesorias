@@ -1,5 +1,6 @@
 package model.DAO;
 
+import utils.ConexionBD;
 import model.Profesor;
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class ProfesorDAO {
     // Insertar profesor
     public void insertProfesor(Profesor profesor) throws SQLException {
         String sql = "INSERT INTO Profesor (nombreCompleto, password) VALUES (?, ?)";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, profesor.getNombreCompleto());
             stmt.setString(2, profesor.getPassword());
@@ -29,7 +30,7 @@ public class ProfesorDAO {
     // Obtener profesor por id
     public Profesor getProfesorById(int idProfesor) throws SQLException {
         String sql = "SELECT * FROM Profesor WHERE idProfesor = ?";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idProfesor);
             ResultSet rs = stmt.executeQuery();
@@ -48,7 +49,7 @@ public class ProfesorDAO {
     public List<Profesor> getAllProfesores() throws SQLException {
         List<Profesor> profesores = new ArrayList<>();
         String sql = "SELECT * FROM Profesor";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

@@ -1,20 +1,18 @@
 package model.DAO;
 
+import utils.ConexionBD;
 import model.Asignatura;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AsignaturaDAO {
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/peticionAsesorias?useSSL=false&serverTimezone=UTC";
-    private final String jdbcUser = "root";
-    private final String jdbcPassword = "";
 
     // Obtener todas las asignaturas
     public List<Asignatura> getAllAsignaturas() throws SQLException {
         List<Asignatura> asignaturas = new ArrayList<>();
         String sql = "SELECT * FROM Asignatura";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {

@@ -1,22 +1,19 @@
 package model.DAO;
 
+import utils.ConexionBD;
 import model.Asesoria;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AsesoriaDAO {
-    private final String jdbcURL = "jdbc:mysql://localhost:3306/peticionAsesorias?useSSL=false&serverTimezone=UTC";
-    private final String jdbcUser = "root";
-    private final String jdbcPassword = "";
-
     private static final String INSERT_SQL = "INSERT INTO Asesoria "
         + "(matricula, idProfesor, idAsignatura, fecha, hora, asunto, alumnoEsProfesor, status, comentarioProfesor) "
         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Insertar nueva asesoría
     public void insertAsesoria(Asesoria asesoria) throws SQLException {
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
 
             stmt.setString(1, asesoria.getMatricula());
@@ -37,7 +34,7 @@ public class AsesoriaDAO {
     public List<Asesoria> getAsesoriasByAlumno(String matricula) throws SQLException {
         List<Asesoria> lista = new ArrayList<>();
         String sql = "SELECT * FROM Asesoria WHERE matricula = ?";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, matricula);
             ResultSet rs = stmt.executeQuery();
@@ -63,7 +60,7 @@ public class AsesoriaDAO {
     public List<Asesoria> getAsesoriasByProfesor(int idProfesor) throws SQLException {
         List<Asesoria> lista = new ArrayList<>();
         String sql = "SELECT * FROM Asesoria WHERE idProfesor = ?";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idProfesor);
             ResultSet rs = stmt.executeQuery();
@@ -88,7 +85,7 @@ public class AsesoriaDAO {
     // Actualizar status y comentario de asesoría
     public void actualizarStatusComentario(int idAsesoria, String status, String comentario) throws SQLException {
         String sql = "UPDATE Asesoria SET status = ?, comentarioProfesor = ? WHERE idAsesoria = ?";
-        try (Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
+        try (Connection conn = ConexionBD.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, status);
             stmt.setString(2, comentario);
