@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Header</title>
     </head>
     <body>
         <header style="background:#ddd; padding:10px; margin-bottom:20px;">

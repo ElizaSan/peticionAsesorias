@@ -8,16 +8,7 @@
     </head>
     <body>
         <jsp:include page="/common/header.jsp" />
-
-      <nav>
-        <!-- Links a login de alumno y profesor -->
-        <ul>
-          <li><a href="index.jsp">Inicio</a></li>
-          <li><a href="alumno/formSolicitud.jsp">Solicitar Asesoría</a></li>
-          <li><a href="profesor/solicitudes.jsp">Solicitudes Profesor</a></li>
-          <li><a href="login.jsp">Login</a></li>
-        </ul>
-      </nav>
+        <jsp:include page="/common/nav.jsp" />
 
       <article>
         <section>
