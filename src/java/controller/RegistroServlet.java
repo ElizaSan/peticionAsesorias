@@ -54,7 +54,7 @@ public class RegistroServlet extends HttpServlet {
                 session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
 
                 // Redirigir a index.jsp para mostrar el mensaje
-                response.sendRedirect(request.getContextPath() + "/index.jsp"); 
+                response.sendRedirect(request.getContextPath() + "index.jsp"); 
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -83,7 +83,7 @@ public class RegistroServlet extends HttpServlet {
                 session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
 
                 // Redirigir a index.jsp para mostrar el mensaje
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                response.sendRedirect(request.getContextPath() + "index.jsp");
 
             } catch (Exception e) {
                 e.printStackTrace();

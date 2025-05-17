@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <jsp:include page="${pageContext.request.contextPath}/common/header.jsp" />
-        <jsp:include page="${pageContext.request.contextPath}/common/nav.jsp" />
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
 
         <h2>Solicitudes Recibidas</h2>
 
@@ -70,6 +70,7 @@
 
         <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
 
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp" />
+        <jsp:include page="common/footer.jsp" />
+
     </body>
 </html>

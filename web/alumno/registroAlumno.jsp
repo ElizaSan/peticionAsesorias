@@ -5,10 +5,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de alumno</title>
     </head>
+    
     <body>
-        <jsp:include page="${pageContext.request.contextPath}/common/header.jsp" />
-        <jsp:include page="${pageContext.request.contextPath}/common/nav.jsp" />
-            <h1>Registro de Alumno</h1>
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
+        
+        <h1>Registro de Alumno</h1>
         
 
         <form action="RegistroServlet" method="post" onsubmit="return registroExitoso();">
@@ -18,10 +20,10 @@
             <label for="matricula">Matrícula:</label><br/>
             <input type="text" id="matricula" name="matricula" pattern="\d{9}" title="Debe contener 9 dígitos" required /><br/><br/>
             
-            <label for="nombreCompleto">Nombre Completo:</label><br/>
+            <label for="nombreCompleto">Nombre completo:</label><br/>
             <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>
 
-            <label for="programaEducativo">Programa Educativo:</label><br/>
+            <label for="programaEducativo">Programa educativo:</label><br/>
             <select name="programaEducativo" id="programaEducativo" required>
                 <option value="ICC">ICC - Ingeniería en Ciencias de la Computación</option>
                 <option value="LCC">LCC - Licenciatura en Ciencias de la Computación</option>
@@ -34,6 +36,7 @@
             <button type="submit">Registrarme</button>
         </form>
 
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp" />
+        <jsp:include page="common/footer.jsp" />
+
     </body>
 </html>

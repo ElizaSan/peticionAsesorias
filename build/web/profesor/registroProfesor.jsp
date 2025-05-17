@@ -6,9 +6,10 @@
         <title>Registro de Profesor</title>
     </head>
     <body>
-        <jsp:include page="${pageContext.request.contextPath}/common/header.jsp" />
-        <jsp:include page="${pageContext.request.contextPath}/common/nav.jsp" />
-        <h1>Registro de Profesor</h1>
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
+        
+        <h1>Registro de profesor</h1>
         
         <form action="RegistroServlet" method="post" onsubmit="return registroExitoso();">
             <input type="hidden" name="tipoUsuario" value="profesor" />
@@ -16,7 +17,7 @@
             <label for="idProfesor">ID Profesor:</label><br/>
             <input type="text" id="idProfesor" name="idProfesor" required /><br/><br/>
             
-            <label for="nombreCompleto">Nombre Completo:</label><br/>
+            <label for="nombreCompleto">Nombre completo:</label><br/>
             <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>
 
             <label for="password">Contraseña:</label><br/>
@@ -25,6 +26,7 @@
             <button type="submit">Registrarme</button>
         </form>
 
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp" />
+        <jsp:include page="common/footer.jsp" />
+
     </body>
 </html>

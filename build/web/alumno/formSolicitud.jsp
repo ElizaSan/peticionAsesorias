@@ -19,8 +19,8 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <jsp:include page="${pageContext.request.contextPath}/common/header.jsp" />
-        <jsp:include page="${pageContext.request.contextPath}/common/nav.jsp" />
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
         
         <h1>Formato de solicitud de asesoría</h1>
         <form action="${pageContext.request.contextPath}/SolicitudServlet" method="post">
@@ -67,6 +67,7 @@
           <button type="submit">Enviar Solicitud</button>
         </form>
 
-        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp" />
+        <jsp:include page="common/footer.jsp" />
+
     </body>
 </html>

@@ -2,20 +2,19 @@
 
 <!DOCTYPE html>
 <html>
-            <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <title>Registro</title>
-                <link rel="stylesheet" href="css/styles.css" />
-                <script src="js/scripts.js" defer></script>
-            </head>
-            <body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Registro</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <script src="js/scripts.js" defer></script>
+    </head>
+            
     <body>
-        <jsp:include page="/common/header.jsp" />
-        <jsp:include page="/common/nav.jsp" />
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
         
-            <h1>Registro</h1>
-       
-                
+        <h1>Registro</h1>
+        
         <article>
             <section>
                 <h2>Selecciona el tipo de usuario para registrarte:</h2>

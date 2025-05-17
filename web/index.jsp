@@ -9,22 +9,22 @@
     </head>
     
     <body>
-        <jsp:include page="/common/header.jsp" />
-        <jsp:include page="/common/nav.jsp" />
+        <jsp:include page="common/header.jsp" />
+        <jsp:include page="common/nav.jsp" />
         
      
-      <article>
+        <article>
           <section>
             <h2>Bienvenido</h2>
             <p>Por favor, ingresa para ver o solicitar asesorías.</p>
           </section>
         </article>
 
-      <aside>
-        <p>Información adicional o anuncios</p>
-      </aside>
+        <aside>
+          <p>Información adicional o anuncios</p>
+        </aside>
 
-      <jsp:include page="/common/footer.jsp" />
+      <jsp:include page="common/footer.jsp" />
     </body>
         
 </html>
