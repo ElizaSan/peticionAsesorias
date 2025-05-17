@@ -4,9 +4,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Footer</title>
+        <link rel="stylesheet" href="css/footer.css" />
     </head>
     <body>
-        <footer style="background:#ddd; padding:10px; margin-top:20px; text-align:center;">
+        <footer>
             <p>© 2025 Petición de Asesorías - Universidad</p>
         </footer>
     </body>

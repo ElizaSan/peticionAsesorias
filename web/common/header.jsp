@@ -4,13 +4,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Header</title>
+        <link rel="stylesheet" href="css/header.css" />
     </head>
     <body>
-        <header style="background:#ddd; padding:10px; margin-bottom:20px;">
-        <h1>Petición de Asesorías</h1>
-        <nav>
-          <a href="<%= request.getContextPath() %>/index.jsp">Inicio</a>
-        </nav>
+        <header>
+            <h1>Sistema de asesorías de la FCC BUAP</h1>
       </header>
     </body>
 </html>
