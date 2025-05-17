@@ -64,6 +64,18 @@
         <servlet-name>SolicitudServlet</servlet-name>
         <servlet-class>controller.SolicitudServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistroServlet</servlet-name>
+        <servlet-class>controller.RegistroServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarAsignaturasServlet</servlet-name>
+        <servlet-class>controller.CargarAsignaturasServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CargarProfesoresServlet</servlet-name>
+        <servlet-class>controller.CargarProfesoresServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
@@ -128,12 +140,21 @@
         <servlet-name>SolicitudServlet</servlet-name>
         <url-pattern>/SolicitudServlet</url-pattern>
     </servlet-mapping>
-    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
-    
+    <servlet-mapping>
+        <servlet-name>RegistroServlet</servlet-name>
+        <url-pattern>/RegistroServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarAsignaturasServlet</servlet-name>
+        <url-pattern>/CargarAsignaturasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarProfesoresServlet</servlet-name>
+        <url-pattern>/CargarProfesoresServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

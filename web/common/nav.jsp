@@ -12,7 +12,7 @@
               <li><a href="index.jsp">Inicio</a></li>
               <li><a href="alumno/formSolicitud.jsp">Solicitar asesoría</a></li>
               <li><a href="profesor/solicitudes.jsp">Solicitudes del profesor</a></li>
-              <li><a href="login.jsp">Registrarse</a></li>
+              <li><a href="registro.jsp">Registrarse</a></li>
               <li><a href="login.jsp">Ingresar</a></li>
             </ul>
       </nav>

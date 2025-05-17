@@ -13,19 +13,18 @@ public class ProfesorDAO {
 
     // Insertar profesor
     public void insertProfesor(Profesor profesor) throws SQLException {
-        String sql = "INSERT INTO Profesor (nombreCompleto, password) VALUES (?, ?)";
-        try (Connection conn = ConexionBD.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, profesor.getNombreCompleto());
-            stmt.setString(2, profesor.getPassword());
-            stmt.executeUpdate();
-            // Obtener id generado
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) {
-                profesor.setIdProfesor(keys.getInt(1));
+            String sql = "INSERT INTO Profesor (idProfesor, nombreCompleto, password) VALUES (?, ?, ?)";
+
+            try (Connection conn = ConexionBD.getConnection(); // Obtener conexión desde ConexionBD
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setInt(1, profesor.getIdProfesor());
+                stmt.setString(2, profesor.getNombreCompleto());
+                stmt.setString(3, profesor.getPassword());
+
+                stmt.executeUpdate();
             }
         }
-    }
 
     // Obtener profesor por id
     public Profesor getProfesorById(int idProfesor) throws SQLException {

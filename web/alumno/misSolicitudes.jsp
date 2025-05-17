@@ -18,7 +18,10 @@
         <jsp:include page="/common/nav.jsp" />
 
         <h2>Mis Solicitudes de asesoría</h2>
-
+        
+        <a href="formSolicitud.jsp">Nueva Solicitud</a> |
+        <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
+        
         <table border="1" cellpadding="5" cellspacing="0">
           <tr>
             <th>ID</th>
@@ -52,8 +55,7 @@
           %>
         </table>
 
-        <a href="formSolicitud.jsp">Nueva Solicitud</a> | 
-        <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
+        
 
         <jsp:include page="../common/footer.jsp" />
     </body>
