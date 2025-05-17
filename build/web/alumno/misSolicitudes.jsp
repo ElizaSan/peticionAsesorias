@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <jsp:include page="../common/header.jsp" />
-        <jsp:include page="/common/nav.jsp" />
+        <jsp:include page="${pageContext.request.contextPath}/common/header.jsp" />
+        <jsp:include page="${pageContext.request.contextPath}/common/nav.jsp" />
 
         <h2>Mis Solicitudes de asesoría</h2>
         
@@ -57,6 +57,6 @@
 
         
 
-        <jsp:include page="../common/footer.jsp" />
+        <jsp:include page="${pageContext.request.contextPath}/common/footer.jsp" />
     </body>
 </html>

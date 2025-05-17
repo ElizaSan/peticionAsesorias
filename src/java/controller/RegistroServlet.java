@@ -6,14 +6,15 @@ import model.DAO.AlumnoDAO;
 import model.DAO.ProfesorDAO;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 public class RegistroServlet extends HttpServlet {
-    
+
     private AlumnoDAO alumnoDAO;
     private ProfesorDAO profesorDAO;
 
@@ -22,19 +23,11 @@ public class RegistroServlet extends HttpServlet {
         alumnoDAO = new AlumnoDAO();
         profesorDAO = new ProfesorDAO();
     }
-    
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String tipoUsuario = request.getParameter("tipoUsuario"); // Alumno o Profesor
 
         if ("alumno".equals(tipoUsuario)) {
@@ -44,6 +37,7 @@ public class RegistroServlet extends HttpServlet {
             String password = request.getParameter("password");
             String programaEducativo = request.getParameter("programaEducativo");
 
+            // Registrar al alumno
             Alumno alumno = new Alumno();
             alumno.setMatricula(matricula);
             alumno.setNombreCompleto(nombreCompleto);
@@ -53,18 +47,27 @@ public class RegistroServlet extends HttpServlet {
             try {
                 // Registrar al alumno
                 alumnoDAO.insertAlumno(alumno);
-                response.sendRedirect(request.getContextPath() + "/index.jsp"); // Redirigir a la página de inicio
+                
+                // Almacenar el mensaje en la sesión
+                HttpSession session = request.getSession();
+                session.setAttribute("mensajeRegistro", "¡Registro exitoso! Ahora puedes iniciar sesión.");
+                session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
+
+                // Redirigir a index.jsp para mostrar el mensaje
+                response.sendRedirect(request.getContextPath() + "/index.jsp"); 
+
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().println("Error al registrar alumno: " + e.getMessage());
             }
 
         } else if ("profesor".equals(tipoUsuario)) {
-            // Obtener los parámetros del formulario para Profesor
+            // Obtener los parámetros del formulario para profesor
             String nombreCompleto = request.getParameter("nombreCompleto");
             String idProfesor = request.getParameter("idProfesor");
             String password = request.getParameter("password");
 
+            // Registrar al profesor
             Profesor profesor = new Profesor();
             profesor.setIdProfesor(Integer.parseInt(idProfesor)); // Convertir ID a int
             profesor.setNombreCompleto(nombreCompleto);
@@ -73,19 +76,24 @@ public class RegistroServlet extends HttpServlet {
             try {
                 // Registrar al profesor
                 profesorDAO.insertProfesor(profesor);
-                response.sendRedirect(request.getContextPath() + "/index.jsp"); // Redirigir a la página de inicio
+                
+                // Almacenar el mensaje en la sesión
+                HttpSession session = request.getSession();
+                session.setAttribute("mensajeRegistro", "¡Registro exitoso! Ahora puedes iniciar sesión.");
+                session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
+
+                // Redirigir a index.jsp para mostrar el mensaje
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().println("Error al registrar profesor: " + e.getMessage());
             }
         }    
-        
     }
 
-    
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet de registro de alumnos y profesores";
+    }
 }

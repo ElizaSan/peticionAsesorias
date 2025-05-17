@@ -1,4 +1,3 @@
-//REGISTER.JSP
 // Mostrar campos de acuerdo con el tipo de usuario seleccionado
 document.addEventListener("DOMContentLoaded", function() {
     // Cambia la visibilidad de los campos según el tipo de usuario seleccionado
@@ -16,3 +15,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
+
+function registroExitoso() {
+    alert("Registro exitoso.");
+    return true;  // Permitir que el formulario se envíe después de la alerta
+}
