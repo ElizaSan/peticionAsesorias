@@ -20,26 +20,27 @@ public class CargarAsignaturasServlet extends HttpServlet {
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }
 
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                try {
+               try {
             // Obtener todas las asignaturas desde la base de datos
             List<Asignatura> asignaturas = asignaturaDAO.getAllAsignaturas();
             request.setAttribute("asignaturas", asignaturas);  // Guardar las asignaturas en el request
 
             // Redirigir a formSolicitud.jsp
             request.getRequestDispatcher("/alumno/formSolicitud.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().println("Error al cargar las asignaturas: " + e.getMessage());
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("error", "Error al cargar las asignaturas: " + e.getMessage());
+                request.getRequestDispatcher("/error.jsp").forward(request, response); // Redirige a una página de error
+            }
     }
 
     

@@ -20,26 +20,27 @@ public class CargarProfesoresServlet extends HttpServlet {
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
     }
 
    
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             try {
-            // Obtener todos los profesores desde la base de datos
-            List<Profesor> profesores = profesorDAO.getAllProfesores();
-            request.setAttribute("profesores", profesores);  // Guardar los profesores en el request
+                try {
+                // Obtener todos los profesores desde la base de datos
+                List<Profesor> profesores = profesorDAO.getAllProfesores();
+                request.setAttribute("profesores", profesores);  // Guardar los profesores en el request
 
-            // Redirigir a formSolicitud.jsp
-            request.getRequestDispatcher("/alumno/formSolicitud.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().println("Error al cargar los profesores: " + e.getMessage());
-        }
+                // Redirigir a formSolicitud.jsp
+                request.getRequestDispatcher("/alumno/formSolicitud.jsp").forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("error", "Error al cargar los profesores: " + e.getMessage());
+                    request.getRequestDispatcher("/error.jsp").forward(request, response); // Redirige a una página de error
+                }
     }
 
    

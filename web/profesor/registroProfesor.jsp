@@ -12,11 +12,11 @@
         
         <h1>Registro de profesor</h1>
         
-        <form action="${pageContext.request.contextPath}/RegistroServlet" method="post" onsubmit="return registroExitoso();">
+        <form action="${pageContext.request.contextPath}/RegistroServlet" method="post">
             <input type="hidden" name="tipoUsuario" value="profesor" />
             
             <label for="idProfesor">ID Profesor:</label><br/>
-            <input type="text" id="idProfesor" maxlength="9" pattern="\d{9}" name="idProfesor" required /><br/><br/>
+            <input type="text" id="idProfesor" name="idProfesor" required /><br/><br/>
             
             <label for="nombreCompleto">Nombre completo:</label><br/>
             <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>

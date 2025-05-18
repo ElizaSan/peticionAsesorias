@@ -10,14 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Solicitudes recibidas</title>
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <jsp:include page="common/header.jsp" />
-        <jsp:include page="common/nav.jsp" />
+        <jsp:include page="../common/header.jsp" />
+        <jsp:include page="../common/nav.jsp" />
 
-        <h2>Solicitudes Recibidas</h2>
+        <h2>Solicitudes recibidas</h2>
 
         <table border="1" cellpadding="5" cellspacing="0">
           <tr>
@@ -70,7 +70,7 @@
 
         <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
 
-        <jsp:include page="common/footer.jsp" />
+        <jsp:include page="../common/footer.jsp" />
 
     </body>
 </html>

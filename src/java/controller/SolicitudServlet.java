@@ -2,74 +2,116 @@ package controller;
 
 import model.Asesoria;
 import model.DAO.AsesoriaDAO;
+import model.DAO.AsignaturaDAO;
+import model.DAO.ProfesorDAO;
+import model.Asignatura;
+import model.Profesor;
 
+import java.util.List;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 
 public class SolicitudServlet extends HttpServlet {
+    
     private AsesoriaDAO asesoriaDAO;
+    private AsignaturaDAO asignaturaDAO;
+    private ProfesorDAO profesorDAO;
 
     @Override
     public void init() throws ServletException {
         super.init();
         asesoriaDAO = new AsesoriaDAO();
+        asignaturaDAO = new AsignaturaDAO();
+        profesorDAO = new ProfesorDAO();
     }
-    
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        try {
+            // Obtener todas las asignaturas y profesores desde la base de datos
+            List<Asignatura> asignaturas = asignaturaDAO.getAllAsignaturas();
+            List<Profesor> profesores = profesorDAO.getAllProfesores();
+            
+            System.out.println("Asignaturas: " + asignaturas.size() + " profesores: " + profesores.size());
+            
+            // Guardar las listas en el request
+            request.setAttribute("asignaturas", asignaturas);
+            request.setAttribute("profesores", profesores);
+
+            // Redirigir al formulario de solicitud
+            request.getRequestDispatcher("/alumno/formSolicitud.jsp").forward(request, response);
+        } catch (SQLException e) {
+            // Manejar la excepción
+            e.printStackTrace();
+            response.getWriter().println("Error al cargar asignaturas o profesores: " + e.getMessage());
+        }
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Obtener parámetros del formulario
-        String nombreCompleto = request.getParameter("nombreCompleto"); // opcional si no usas aquí
-        String matricula = request.getParameter("matricula");
-        String programaEducativo = request.getParameter("programaEducativo"); // opcional si no usas aquí
-        int idAsignatura = Integer.parseInt(request.getParameter("idAsignatura"));
-        int idProfesor = Integer.parseInt(request.getParameter("idProfesor"));
-        boolean alumnoEsProfesor = Boolean.parseBoolean(request.getParameter("alumnoEsProfesor"));
-        String fecha = request.getParameter("fecha"); // "YYYY-MM-DD"
-        String hora = request.getParameter("hora");   // "HH:MM"
-        String asunto = request.getParameter("asunto");
+                // Obtener parámetros del formulario
+                String nombreCompleto = request.getParameter("nombreCompleto");
+                String matricula = request.getParameter("matricula");
+                String programaEducativo = request.getParameter("programaEducativo");
 
-        // Crear objeto Asesoria
-        Asesoria asesoria = new Asesoria();
-        asesoria.setMatricula(matricula);
-        asesoria.setIdProfesor(idProfesor);
-        asesoria.setIdAsignatura(idAsignatura);
-        asesoria.setFecha(fecha);
-        asesoria.setHora(hora);
-        asesoria.setAsunto(asunto);
-        asesoria.setAlumnoEsProfesor(alumnoEsProfesor);
-        asesoria.setStatus("en_proceso"); // estado inicial
-        asesoria.setComentarioProfesor(null);
+                
+                int idAsignatura = 1;  // valor predeterminado si no se selecciona ninguna asignatura
+                int idProfesor = 1;    // valor predeterminado si no se selecciona ningún profesor
 
-        try {
-            asesoriaDAO.insertAsesoria(asesoria);
-            // Redirigir a lista de solicitudes del alumno
-            response.sendRedirect(request.getContextPath() + "/MisSolicitudesServlet");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.getWriter().println("Error al guardar la solicitud: " + e.getMessage());
-        }
-        
+                String idAsignaturaStr = request.getParameter("idAsignatura");
+                if (idAsignaturaStr != null && !idAsignaturaStr.isEmpty()) {
+                    idAsignatura = Integer.parseInt(idAsignaturaStr);  
+                }
+
+                String idProfesorStr = request.getParameter("idProfesor");
+                if (idProfesorStr != null && !idProfesorStr.isEmpty()) {
+                    idProfesor = Integer.parseInt(idProfesorStr); 
+                }
+
+                boolean alumnoEsProfesor = Boolean.parseBoolean(request.getParameter("alumnoEsProfesor"));
+                String fecha = request.getParameter("fecha");
+                String hora = request.getParameter("hora");
+                String asunto = request.getParameter("asunto");
+
+                
+                Asesoria asesoria = new Asesoria();
+                asesoria.setMatricula(matricula);
+                asesoria.setIdProfesor(idProfesor);  
+                asesoria.setIdAsignatura(idAsignatura);  
+                asesoria.setFecha(fecha);
+                asesoria.setHora(hora);
+                asesoria.setAsunto(asunto);
+                asesoria.setAlumnoEsProfesor(alumnoEsProfesor);
+                asesoria.setStatus("en_proceso");
+                asesoria.setComentarioProfesor(null);
+
+                try {
+                    
+                    asesoriaDAO.insertAsesoria(asesoria);
+
+                    
+                    HttpSession session = request.getSession();
+                    session.setAttribute("mensajeRegistro", "¡Solicitud de asesoría registrada con éxito!");
+
+                    
+                    response.sendRedirect(request.getContextPath() + "/index.jsp");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().println("Error al guardar la solicitud: " + e.getMessage());
+                }
     }
 
-    
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Servlet para manejar solicitudes de asesoría";
+    }
 }

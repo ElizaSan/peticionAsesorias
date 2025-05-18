@@ -11,6 +11,7 @@
             <ul>
                 <li><a href="index.jsp">Inicio</a></li>
                 <li><a href="${pageContext.request.contextPath}/alumno/formSolicitud.jsp">Solicitar asesoría</a></li>
+                <li><a href="${pageContext.request.contextPath}/alumno/misSolicitudes.jsp">Mis solicitudes</a></li>
                 <li><a href="${pageContext.request.contextPath}/profesor/solicitudes.jsp">Solicitudes del profesor</a></li>
                 <li><a href="${pageContext.request.contextPath}/registro.jsp">Registrarse</a></li>
                 <li><a href="${pageContext.request.contextPath}/login.jsp">Ingresar</a></li>

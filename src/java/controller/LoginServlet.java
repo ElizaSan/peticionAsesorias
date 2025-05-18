@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 public class LoginServlet extends HttpServlet {
 
     private AlumnoDAO alumnoDAO;
@@ -37,28 +35,32 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String tipoUsuario = request.getParameter("tipoUsuario"); // "alumno" o "profesor"
-        String identificador = request.getParameter("identificador"); // matricula o idProfesor
+        String tipoUsuario = request.getParameter("tipoUsuario"); // alumno o profesor
+        String identificador = request.getParameter("identificador"); // matrícula o idProfesor
         String password = request.getParameter("password");
 
         HttpSession session = request.getSession();
 
         try {
             if ("alumno".equalsIgnoreCase(tipoUsuario)) {
+                // Validar matrícula de alumno
                 Alumno alumno = alumnoDAO.getAlumnoByMatricula(identificador);
                 if (alumno != null && alumno.getPassword().equals(password)) {
                     session.setAttribute("usuario", alumno);
                     session.setAttribute("tipoUsuario", "alumno");
+                    session.setAttribute("identificador", identificador); // Guardar la matrícula en la sesión
                     response.sendRedirect(request.getContextPath() + "/alumno/misSolicitudes.jsp");
                 } else {
                     response.getWriter().println("Matrícula o contraseña incorrecta.");
                 }
             } else if ("profesor".equalsIgnoreCase(tipoUsuario)) {
-                int idProf = Integer.parseInt(identificador);
+                // Validar idProfesor de profesor
+                int idProf = Integer.parseInt(identificador);  // Convertir el ID de profesor a int
                 Profesor profesor = profesorDAO.getProfesorById(idProf);
                 if (profesor != null && profesor.getPassword().equals(password)) {
                     session.setAttribute("usuario", profesor);
                     session.setAttribute("tipoUsuario", "profesor");
+                    session.setAttribute("identificador", identificador); // Guardar el idProfesor en la sesión
                     response.sendRedirect(request.getContextPath() + "/profesor/solicitudes.jsp");
                 } else {
                     response.getWriter().println("ID o contraseña incorrecta.");

@@ -1,12 +1,10 @@
 package controller;
 
-import model.Alumno;
 import model.Asesoria;
 import model.DAO.AsesoriaDAO;
 
 import java.util.List;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,31 +19,33 @@ public class MisSolicitudesServlet extends HttpServlet {
     public void init() {
         asesoriaDAO = new AsesoriaDAO();
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    
+       
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession(false);
-        if(session == null || !"alumno".equals(session.getAttribute("tipoUsuario"))) {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+        // Obtener la matrícula del alumno desde la sesión
+        HttpSession session = request.getSession();
+        String matricula = (String) session.getAttribute("matricula");
+        
+        if (matricula == null) {
+            // Redirigir a la página de login si no hay matrícula en la sesión
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
 
-        Alumno alumno = (Alumno) session.getAttribute("usuario");
         try {
-            List<Asesoria> lista = asesoriaDAO.getAsesoriasByAlumno(alumno.getMatricula());
-            request.setAttribute("listaSolicitudes", lista);
+            // Obtener las solicitudes de asesoría para el alumno desde la base de datos
+            List<Asesoria> listaSolicitudes = asesoriaDAO.getAsesoriasByAlumno(matricula);
+            
+            // Guardar las solicitudes en el request
+            request.setAttribute("listaSolicitudes", listaSolicitudes);
+
+            // Redirigir a la página misSolicitudes.jsp
             request.getRequestDispatcher("/alumno/misSolicitudes.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Error al cargar solicitudes: " + e.getMessage());
+            response.getWriter().println("Error al obtener las solicitudes de asesoría: " + e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class MisSolicitudesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     
