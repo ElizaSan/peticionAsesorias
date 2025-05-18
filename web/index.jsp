@@ -23,6 +23,13 @@
         <aside>
           <p>Información adicional o anuncios</p>
         </aside>
+        
+        <section>
+                <h2>Comprobar conexión con la base de datos</h2>
+                <a href="temp.jsp">
+                    <button type="button">Probar Conexión</button>
+                </a>
+        </section>
 
       <jsp:include page="common/footer.jsp" />
     </body>

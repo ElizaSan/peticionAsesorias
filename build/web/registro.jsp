@@ -10,9 +10,8 @@
     </head>
             
     <body>
-        <jsp:include page="common/header.jsp" />
-        <jsp:include page="common/nav.jsp" />
         
+
         <h1>Registro</h1>
         
         <article>
@@ -20,7 +19,7 @@
                 <h2>Selecciona el tipo de usuario para registrarte:</h2>
                 <div>
                     <!-- Botón para Alumno -->
-                    <a href="alumno/registroAlumno.jsp">
+                    <a href="${pageContext.request.contextPath}/alumno/registroAlumno.jsp">
                         <button type="button">Soy alumno</button>
                     </a>
 
@@ -32,6 +31,6 @@
             </section>
         </article>
 
-        <jsp:include page="common/footer.jsp" />
+        
     </body>
 </html>

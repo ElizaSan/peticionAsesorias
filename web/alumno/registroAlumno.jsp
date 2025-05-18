@@ -7,13 +7,12 @@
     </head>
     
     <body>
-        <jsp:include page="common/header.jsp" />
-        <jsp:include page="common/nav.jsp" />
+        
         
         <h1>Registro de Alumno</h1>
         
 
-        <form action="RegistroServlet" method="post" onsubmit="return registroExitoso();">
+        <form action="${pageContext.request.contextPath}/RegistroServlet" method="post" onsubmit="registroExitoso();">
             
             <input type="hidden" name="tipoUsuario" value="alumno" />
             
@@ -36,7 +35,7 @@
             <button type="submit">Registrarme</button>
         </form>
 
-        <jsp:include page="common/footer.jsp" />
+        
 
     </body>
 </html>

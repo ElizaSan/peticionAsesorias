@@ -5,6 +5,10 @@ import model.Profesor;
 import model.DAO.AlumnoDAO;
 import model.DAO.ProfesorDAO;
 
+import utils.ConexionBD;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +23,24 @@ public class RegistroServlet extends HttpServlet {
     private ProfesorDAO profesorDAO;
 
     @Override
-    public void init() {
+    public void init() throws ServletException {
+        // Inicializar DAOs
         alumnoDAO = new AlumnoDAO();
         profesorDAO = new ProfesorDAO();
+
+        // Verificar la conexión a la base de datos al iniciar el servlet
+        try (Connection con = ConexionBD.getConnection()) {
+            if (con != null && !con.isClosed()) {
+                System.out.println("Conexión exitosa a la base de datos.");
+            } else {
+                System.out.println("No se pudo establecer la conexión.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ServletException("Error al conectar a la base de datos: " + e.getMessage(), e);
+        }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +72,7 @@ public class RegistroServlet extends HttpServlet {
                 session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
 
                 // Redirigir a index.jsp para mostrar el mensaje
-                response.sendRedirect(request.getContextPath() + "index.jsp"); 
+                response.sendRedirect(request.getContextPath() + "/"); 
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -83,7 +101,7 @@ public class RegistroServlet extends HttpServlet {
                 session.setAttribute("firstVisit", false); // Marcar que ya no es la primera visita
 
                 // Redirigir a index.jsp para mostrar el mensaje
-                response.sendRedirect(request.getContextPath() + "index.jsp");
+                response.sendRedirect(request.getContextPath() + "/");
 
             } catch (Exception e) {
                 e.printStackTrace();
