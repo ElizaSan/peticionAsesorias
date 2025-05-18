@@ -10,7 +10,8 @@
     </head>
             
     <body>
-        
+        <jsp:include page="/common/header.jsp" />
+        <jsp:include page="/common/nav.jsp" />
 
         <h1>Registro</h1>
         
@@ -31,6 +32,7 @@
             </section>
         </article>
 
+        <jsp:include page="/common/footer.jsp" />
         
     </body>
 </html>

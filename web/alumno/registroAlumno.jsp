@@ -4,10 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro de alumno</title>
+        <link rel="stylesheet" href="../css/styles.css" />
     </head>
     
     <body>
-        
+        <jsp:include page="../common/header.jsp" />
+        <jsp:include page="../common/nav.jsp" />
         
         <h1>Registro de Alumno</h1>
         
@@ -17,7 +19,7 @@
             <input type="hidden" name="tipoUsuario" value="alumno" />
             
             <label for="matricula">Matrícula:</label><br/>
-            <input type="text" id="matricula" name="matricula" pattern="\d{9}" title="Debe contener 9 dígitos" required /><br/><br/>
+            <input type="text" id="matricula" name="matricula" maxlength="9" pattern="\d{9}" title="Debe contener 9 dígitos" required /><br/><br/>
             
             <label for="nombreCompleto">Nombre completo:</label><br/>
             <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>
@@ -35,7 +37,8 @@
             <button type="submit">Registrarme</button>
         </form>
 
-        
+        <jsp:include page="../common/footer.jsp" />
+
 
     </body>
 </html>

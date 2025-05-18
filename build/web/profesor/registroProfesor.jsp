@@ -3,19 +3,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro de Profesor</title>
+        <title>Registro de profesor</title>
+        <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
-        <jsp:include page="common/header.jsp" />
-        <jsp:include page="common/nav.jsp" />
+        <jsp:include page="../common/header.jsp" />
+        <jsp:include page="../common/nav.jsp" />
         
         <h1>Registro de profesor</h1>
         
-        <form action="RegistroServlet" method="post" onsubmit="return registroExitoso();">
+        <form action="${pageContext.request.contextPath}/RegistroServlet" method="post" onsubmit="return registroExitoso();">
             <input type="hidden" name="tipoUsuario" value="profesor" />
             
             <label for="idProfesor">ID Profesor:</label><br/>
-            <input type="text" id="idProfesor" name="idProfesor" required /><br/><br/>
+            <input type="text" id="idProfesor" maxlength="9" pattern="\d{9}" name="idProfesor" required /><br/><br/>
             
             <label for="nombreCompleto">Nombre completo:</label><br/>
             <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>
@@ -26,7 +27,7 @@
             <button type="submit">Registrarme</button>
         </form>
 
-        <jsp:include page="common/footer.jsp" />
+        <jsp:include page="../common/footer.jsp" />
 
     </body>
 </html>
