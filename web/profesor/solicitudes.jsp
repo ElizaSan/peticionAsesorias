@@ -2,11 +2,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Asesoria" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="model.DAO.AsesoriaDAO" %>
 
 
 
 <%
     // Obtener la sesión
+    AsesoriaDAO asesoriaDAO =  new AsesoriaDAO(); 
     session = request.getSession();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
     String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
@@ -19,6 +21,7 @@
         <title>Solicitudes del profesor</title>
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
+    
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
@@ -58,7 +61,7 @@
             <th>Acciones</th>
           </tr>
           <%
-            List<Asesoria> lista = (List<Asesoria>) request.getAttribute("listaSolicitudes");
+            List<Asesoria> lista = asesoriaDAO.getAsesoriasByProfesor(Integer.parseInt(identificador));
             if (lista != null && !lista.isEmpty()) {
               for (Asesoria a : lista) {
           %>
@@ -73,7 +76,7 @@
               <td><%= a.getStatus() %></td>
               <td>
                   
-                <form action="ResponderSolicitudServlet" method="post">
+                <form action="${pageContext.request.contextPath}/ResponderSolicitudServlet" method="post">
                   <input type="hidden" name="idAsesoria" value="<%= a.getIdAsesoria() %>" />
                   <select name="status" required>
                     <option value="">Responder</option>
@@ -99,6 +102,6 @@
         <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
 
         <jsp:include page="../common/footer.jsp" />
-
+    <% } %>
     </body>
 </html>

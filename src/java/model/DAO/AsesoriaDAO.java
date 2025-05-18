@@ -52,10 +52,15 @@ public class AsesoriaDAO {
                 a.setComentarioProfesor(rs.getString("comentarioProfesor"));
                 lista.add(a);
             }
-        }
+        }catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error al obtener las asesorías del alumno: " + e.getMessage());
+    }
         return lista;
     }
 
+
+    
     // Obtener asesorías asignadas a un profesor por idProfesor
     public List<Asesoria> getAsesoriasByProfesor(int idProfesor) throws SQLException {
         List<Asesoria> lista = new ArrayList<>();

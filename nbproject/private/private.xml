@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/index.jsp</file>
+            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/login.jsp</file>
+            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/src/java/controller/LoginServlet.java</file>
+            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/alumno/misSolicitudes.jsp</file>
             <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/alumno/formSolicitud.jsp</file>
-            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/src/java/model/DAO/ProfesorDAO.java</file>
-            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/src/java/controller/SolicitudServlet.java</file>
             <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/profesor/solicitudes.jsp</file>
             <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/src/java/controller/ResponderSolicitudServlet.java</file>
-            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/profesor/responder.jsp</file>
-            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/src/java/model/DAO/AsesoriaDAO.java</file>
+            <file>file:/home/mimas/NetBeansProjects/peticionAsesorias/web/common/nav.jsp</file>
         </group>
     </open-files>
 </project-private>

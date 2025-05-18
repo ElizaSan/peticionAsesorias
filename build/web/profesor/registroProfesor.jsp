@@ -13,7 +13,7 @@
         <h1>Registro de profesor</h1>
         
         <form action="${pageContext.request.contextPath}/RegistroServlet" method="post">
-            <input type="hidden" name="tipoUsuario" value="profesor" />
+            <input type="hidden" name="tipoUsuario" value="profesor" /> 
             
             <label for="idProfesor">ID Profesor:</label><br/>
             <input type="text" id="idProfesor" name="idProfesor" required /><br/><br/>

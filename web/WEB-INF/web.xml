@@ -76,6 +76,10 @@
         <servlet-name>CargarProfesoresServlet</servlet-name>
         <servlet-class>controller.CargarProfesoresServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CargarProfesorServlet</servlet-name>
+        <servlet-class>controller.CargarProfesorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AlumnoServlet</servlet-name>
         <url-pattern>/AlumnoServlet</url-pattern>
@@ -154,6 +158,10 @@
     <servlet-mapping>
         <servlet-name>CargarProfesoresServlet</servlet-name>
         <url-pattern>/CargarProfesoresServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CargarProfesorServlet</servlet-name>
+        <url-pattern>/CargarProfesorServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

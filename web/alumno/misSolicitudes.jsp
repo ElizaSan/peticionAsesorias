@@ -2,17 +2,18 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="model.Asesoria" %>
+<%@ page import="model.DAO.AsesoriaDAO" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 
-<%
-    List<Asesoria> lista = (List<Asesoria>) request.getAttribute("listaSolicitudes");
-%>
+
 
 <%
     // Obtener la sesión
     session = request.getSession();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
     String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
+    AsesoriaDAO asesoriasDAO = new AsesoriaDAO() ; 
+    List<Asesoria> lista = new AsesoriaDAO().getAsesoriasByAlumno(identificador) ;
 %>
 
 <!DOCTYPE html>

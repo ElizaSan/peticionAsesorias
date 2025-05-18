@@ -22,14 +22,6 @@ public class LoginServlet extends HttpServlet {
         alumnoDAO = new AlumnoDAO();
         profesorDAO = new ProfesorDAO();
     }
-    
-  
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -64,6 +56,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("tipoUsuario", "profesor");
                     session.setAttribute("identificador", identificador); // Guardar el idProfesor en la sesión
                     session.setAttribute("nombreCompleto", profesor.getNombreCompleto()); // Guardar el nombre completo
+                    
                     response.sendRedirect(request.getContextPath() + "/profesor/solicitudes.jsp");
                 } else {
                     response.getWriter().println("ID o contraseña incorrecta.");

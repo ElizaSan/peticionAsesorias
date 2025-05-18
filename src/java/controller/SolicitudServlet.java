@@ -30,70 +30,41 @@ public class SolicitudServlet extends HttpServlet {
         profesorDAO = new ProfesorDAO();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-       
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-         try {
-            // Obtener todas las asignaturas y profesores desde la base de datos
-            List<Asignatura> asignaturas = asignaturaDAO.getAllAsignaturas();
-            List<Profesor> profesores = profesorDAO.getAllProfesores();
-            
-            // Guardar las listas en el request
-            request.setAttribute("asignaturas", asignaturas);
-            request.setAttribute("profesores", profesores);
-
-            // Redirigir al formulario de solicitud
-            request.getRequestDispatcher("/alumno/formSolicitud.jsp").forward(request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.getWriter().println("Error al cargar asignaturas o profesores: " + e.getMessage());
-        }
-        
-        
-        
-        
+                
         // Obtener parámetros del formulario
         String nombreCompleto = request.getParameter("nombreCompleto");
-        String matricula = request.getParameter("matricula");
         String programaEducativo = request.getParameter("programaEducativo");
-        
-        int idAsignatura = 1;  // valor predeterminado si no se selecciona ninguna asignatura
-        int idProfesor = 1;    // valor predeterminado si no se selecciona ningún profesor
-
-        String idAsignaturaStr = request.getParameter("idAsignatura");
-        if (idAsignaturaStr != null && !idAsignaturaStr.isEmpty()) {
-            idAsignatura = Integer.parseInt(idAsignaturaStr);  
-        }
-
-        String idProfesorStr = request.getParameter("idProfesor");
-        if (idProfesorStr != null && !idProfesorStr.isEmpty()) {
-            idProfesor = Integer.parseInt(idProfesorStr); 
-        }
-
+        String matricula = request.getParameter("matricula");
+        String idProfesor = request.getParameter("idProfesor");
+        String idAsignatura = request.getParameter("idAsignatura");
         boolean alumnoEsProfesor = Boolean.parseBoolean(request.getParameter("alumnoEsProfesor"));
         String fecha = request.getParameter("fecha");
         String hora = request.getParameter("hora");
         String asunto = request.getParameter("asunto");
+        
+
+        
 
         Asesoria asesoria = new Asesoria();
-        asesoria.setMatricula(matricula);
-        asesoria.setIdProfesor(idProfesor);  
-        asesoria.setIdAsignatura(idAsignatura);  
+        
+        
+        asesoria.setMatricula(matricula);          
+        asesoria.setIdProfesor(Integer.parseInt(idProfesor));
+        asesoria.setIdAsignatura(Integer.parseInt(idAsignatura));
         asesoria.setFecha(fecha);
         asesoria.setHora(hora);
         asesoria.setAsunto(asunto);
         asesoria.setAlumnoEsProfesor(alumnoEsProfesor);
         asesoria.setStatus("en_proceso");
         asesoria.setComentarioProfesor(null);
+        
+        
+        
 
         try {
             asesoriaDAO.insertAsesoria(asesoria);
@@ -101,7 +72,7 @@ public class SolicitudServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("mensajeRegistro", "¡Solicitud de asesoría registrada con éxito!");
 
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            response.sendRedirect(request.getContextPath() + "/");
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().println("Error al guardar la solicitud: " + e.getMessage());
