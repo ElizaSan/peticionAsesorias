@@ -52,26 +52,30 @@ public class ProfesorDAO {
     }
 
     
+// Obtener todos los profesores con los campos necesarios
     public List<Profesor> getAllProfesores() throws SQLException {
         List<Profesor> profesores = new ArrayList<>();
-        String sql = "SELECT * FROM Profesor";
+        String sql = "SELECT idProfesor, nombreCompleto FROM Profesor";  // Solo seleccionamos idProfesor y nombreCompleto
         
-        try (Connection conn = ConexionBD.getConnection(); 
+        try (Connection conn = ConexionBD.getConnection();
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
-            
+
             while (rs.next()) {
                 Profesor profesor = new Profesor();
                 profesor.setIdProfesor(rs.getInt("idProfesor"));
                 profesor.setNombreCompleto(rs.getString("nombreCompleto"));
-                profesor.setPassword(rs.getString("password"));
                 profesores.add(profesor);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Error al listar los profesores: " + e.getMessage());
+            throw new SQLException("Error al obtener los profesores: " + e.getMessage());
         }
-        
+
         return profesores;
     }
+    
+    
+    
+   
 }

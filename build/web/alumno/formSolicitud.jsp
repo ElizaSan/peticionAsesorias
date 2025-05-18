@@ -9,6 +9,8 @@
     session = request.getSession();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
     String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
+    String nombreCompleto = (String) session.getAttribute("nombreCompleto"); // Obtener el nombre del alumno
+    String programaEducativo = (String) session.getAttribute("programaEducativo"); // Obtener el nombre del alumno
 %>
 
 <!DOCTYPE html>
@@ -20,7 +22,7 @@
     </head>
     
     <body>
-        <!-- Incluir el header y el nav -->
+       
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
         
@@ -40,27 +42,23 @@
             <%    
                 // Si está logueado, obtener las asignaturas y los profesores
                 List<Asignatura> asignaturas = (List<Asignatura>) request.getAttribute("asignaturas");
-                List<Profesor> profesores = (List<Profesor>) request.getAttribute("profesores");
+                
             %>
         
             <!-- Mostrar el formulario de solicitud -->
             <h1>Formato de solicitud de asesoría</h1>
             <form action="${pageContext.request.contextPath}/SolicitudServlet" method="post">
                 <label>Nombre Completo:</label><br/>
-                <input type="text" name="nombreCompleto" required /><br/><br/>
+                <input type="text" name="nombreCompleto" value="<%= nombreCompleto%>" readonly /><br/><br/>
 
                 <label>Matrícula:</label><br/>
-                <input type="text" name="matricula" value="<%= identificador %>" readonly required /><br/><br/>
+                <input type="text" name="matricula" value="<%= identificador %>" readonly /><br/><br/>
 
                 <label>Programa Educativo:</label><br/>
-                <select name="programaEducativo" required>
-                    <option value="ICC">ICC</option>
-                    <option value="LCC">LCC</option>
-                    <option value="ITI">ITI</option>
-                </select><br/><br/>
+                <input type="text" name="programaEducativo" value="<%= programaEducativo %>" readonly /><br/><br/>
 
                 <label>Asignatura:</label><br/>
-                <select name="idAsignatura" required>
+                <select name="idAsignatura">
                     <% 
                         if (asignaturas != null && !asignaturas.isEmpty()) {
                             for (Asignatura a : asignaturas) { 
@@ -74,20 +72,33 @@
                     <% } %>
                 </select><br/><br/>
 
-                <label>Profesor:</label><br/>
-                <select name="idProfesor" required>
-                    <% 
-                        if (profesores != null && !profesores.isEmpty()) {
-                            for (Profesor p : profesores) { 
-                    %>
-                        <option value="<%= p.getIdProfesor() %>"><%= p.getNombreCompleto() %></option>
-                    <% 
-                            }
-                        } else {
-                    %>
-                        <option value="">No hay profesores disponibles</option>
+                
+                
+                <label for="idProfesor">Profesor:</label><br/>
+                <%
+                    List<Profesor> profesores = (List<Profesor>) request.getAttribute("profesores");
+                    if (profesores != null && !profesores.isEmpty()) {
+                %>
+                    <ul>
+                    <% for (Profesor p : profesores) { %>
+                        <li><strong>ID:</strong> <%= p.getIdProfesor() %> - <strong>Nombre:</strong> <%= p.getNombreCompleto() %></li>
                     <% } %>
-                </select><br/><br/>
+                    </ul>
+                <%
+                    } else {
+                %>
+                    <p>No hay profesores registrados.</p>
+                <%
+                    }
+                %>
+
+                
+                
+                
+                
+                
+                
+                
 
                 <label>¿Eres alumno de este profesor?</label><br/>
                 <input type="radio" name="alumnoEsProfesor" value="true" /> Sí
@@ -109,6 +120,10 @@
             } 
         %>
 
+        
+     
+        
+        
         <jsp:include page="../common/footer.jsp" />
 
     </body>

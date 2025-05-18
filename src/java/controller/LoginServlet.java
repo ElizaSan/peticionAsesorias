@@ -49,6 +49,8 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("usuario", alumno);
                     session.setAttribute("tipoUsuario", "alumno");
                     session.setAttribute("identificador", identificador); // Guardar la matrícula en la sesión
+                    session.setAttribute("nombreCompleto", alumno.getNombreCompleto()); // Guardar el nombre completo
+                    session.setAttribute("programaEducativo", alumno.getProgramaEducativo());
                     response.sendRedirect(request.getContextPath() + "/alumno/misSolicitudes.jsp");
                 } else {
                     response.getWriter().println("Matrícula o contraseña incorrecta.");
@@ -61,6 +63,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("usuario", profesor);
                     session.setAttribute("tipoUsuario", "profesor");
                     session.setAttribute("identificador", identificador); // Guardar el idProfesor en la sesión
+                    session.setAttribute("nombreCompleto", profesor.getNombreCompleto()); // Guardar el nombre completo
                     response.sendRedirect(request.getContextPath() + "/profesor/solicitudes.jsp");
                 } else {
                     response.getWriter().println("ID o contraseña incorrecta.");

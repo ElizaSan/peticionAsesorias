@@ -1,23 +1,49 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-%@ page import="java.util.List" %>
+<%@ page import="java.util.List" %>
 <%@ page import="model.Asesoria" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+
+
 
 <%
-    List<Asesoria> lista = (List<Asesoria>) request.getAttribute("listaSolicitudes");
+    // Obtener la sesión
+    session = request.getSession();
+    String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
+    String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
 %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Solicitudes recibidas</title>
+        <title>Solicitudes del profesor</title>
         <link rel="stylesheet" href="../css/styles.css" />
     </head>
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
 
-        <h2>Solicitudes recibidas</h2>
+        
+        
+        <%
+            // Verificar si el usuario ha iniciado sesión
+            if (identificador == null || tipoUsuario == null) {
+        %>
+            <!-- Si no ha iniciado sesión, mostrar el mensaje de inicio de sesión o registro -->
+            
+            <h3>Debes iniciar sesión para ver tus solicitudes.</h3>
+            
+        <% 
+            } else {
+        %>
+        
+        
+        
+        
+        
+        <h2>Solicitudes del profesor</h2>
+        
+        
 
         <table border="1" cellpadding="5" cellspacing="0">
           <tr>
@@ -32,6 +58,7 @@
             <th>Acciones</th>
           </tr>
           <%
+            List<Asesoria> lista = (List<Asesoria>) request.getAttribute("listaSolicitudes");
             if (lista != null && !lista.isEmpty()) {
               for (Asesoria a : lista) {
           %>
@@ -45,7 +72,8 @@
               <td><%= a.isAlumnoEsProfesor() ? "Sí" : "No" %></td>
               <td><%= a.getStatus() %></td>
               <td>
-                <form action="ResponderSolicitudServlet" method="post" style="display:inline;">
+                  
+                <form action="ResponderSolicitudServlet" method="post">
                   <input type="hidden" name="idAsesoria" value="<%= a.getIdAsesoria() %>" />
                   <select name="status" required>
                     <option value="">Responder</option>

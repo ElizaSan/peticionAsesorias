@@ -5,7 +5,9 @@ public class Profesor {
     private String nombreCompleto;
     private String password;
 
-    public Profesor() {}
+    public Profesor() {
+        
+    }
 
     public int getIdProfesor() {
         return idProfesor;
