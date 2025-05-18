@@ -1,7 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.Asesoria" %>
+<%@ page import="model.DAO.AsesoriaDAO" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.util.List" %>
+
 
 <%
     // Obtener la sesión
@@ -15,9 +17,10 @@
         return;
     }
 
-    // Obtener los detalles de la solicitud
-    int idAsesoria = Integer.parseInt(request.getParameter("idAsesoria"));
-    Asesoria asesoria = asesoriaDAO.getAsesoriaById(idAsesoria); // Método en DAO que te devuelve una solicitud
+        // Obtener los detalles de la solicitud
+    int idAsesoria = Integer.parseInt(identificador);
+    
+    Asesoria asesoria = new AsesoriaDAO().getAsesoriasById(idAsesoria); // Método en DAO que te devuelve una solicitud// Método en DAO que te devuelve una solicitud
 %>
 
 <!DOCTYPE html>

@@ -35,7 +35,6 @@
                   } else if (tipoUsuario ==  "profesor"){
                 %>
                 <li><a href="${pageContext.request.contextPath}/profesor/solicitudes.jsp">Solicitudes del profesor</a></li>
-                <li><a href="${pageContext.request.contextPath}/profesor/responder.jsp">Mis respuestas</a></li>
                 <li> <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a></li>               
                 <% 
                   }else {

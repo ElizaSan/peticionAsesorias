@@ -60,6 +60,34 @@ public class AsesoriaDAO {
     }
 
 
+    public Asesoria getAsesoriasById(int id) throws SQLException {
+        Asesoria lista = new Asesoria();
+        String sql = "SELECT * FROM Asesoria WHERE idAsesoria = ?";
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Asesoria a = new Asesoria();
+                a.setIdAsesoria(rs.getInt("idAsesoria"));
+                a.setMatricula(rs.getString("matricula"));
+                a.setIdProfesor(rs.getInt("idProfesor"));
+                a.setIdAsignatura(rs.getInt("idAsignatura"));
+                a.setFecha(rs.getDate("fecha").toString());
+                a.setHora(rs.getTime("hora").toString().substring(0,5));
+                a.setAsunto(rs.getString("asunto"));
+                a.setAlumnoEsProfesor(rs.getBoolean("alumnoEsProfesor"));
+                a.setStatus(rs.getString("status"));
+                a.setComentarioProfesor(rs.getString("comentarioProfesor"));
+                return a;
+            }
+        }catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error al obtener las asesorías del alumno: " + e.getMessage());
+    }
+        return lista;
+    }
+    
     
     // Obtener asesorías asignadas a un profesor por idProfesor
     public List<Asesoria> getAsesoriasByProfesor(int idProfesor) throws SQLException {

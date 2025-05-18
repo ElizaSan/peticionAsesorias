@@ -3,6 +3,8 @@
 <%@ page import="model.Asesoria" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="model.DAO.AsesoriaDAO" %>
+<%@ page import="model.DAO.AlumnoDAO" %>
+<%@ page import="model.Alumno" %>
 
 
 
@@ -25,7 +27,13 @@
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
-
+    <%
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        
+        String nombreCompleto = (String) session.getAttribute("nombreCompleto");
+    %>
+        <p><%= nombreCompleto%></p>
+              
         
         
         <%
@@ -40,10 +48,6 @@
             } else {
         %>
         
-        
-        
-        
-        
         <h2>Solicitudes del profesor</h2>
         
         
@@ -51,7 +55,8 @@
         <table border="1" cellpadding="5" cellspacing="0">
           <tr>
             <th>ID</th>
-            <th>Alumno (Matrícula)</th>
+            <th>Matrícula del alumno</th>
+            <th>Nombre completo</th>
             <th>Asignatura</th>
             <th>Fecha</th>
             <th>Hora</th>
@@ -68,18 +73,28 @@
             <tr>
               <td><%= a.getIdAsesoria() %></td>
               <td><%= a.getMatricula() %></td>
+              <td><%= alumnoDAO.getAlumnoByMatricula(a.getMatricula()).getNombreCompleto()
+                  %></td>
               <td><%= a.getIdAsignatura() %></td>
               <td><%= a.getFecha() %></td>
               <td><%= a.getHora() %></td>
               <td><%= a.getAsunto() %></td>
               <td><%= a.isAlumnoEsProfesor() ? "Sí" : "No" %></td>
-              <td><%= a.getStatus() %></td>
+              <td 
+    <% if (a.getStatus().equalsIgnoreCase("aceptada")) { %>
+        style="color:green"
+    <% } else if (a.getStatus().equalsIgnoreCase("denegada")) { %>
+        style="color:red"
+    <% } %>>
+                  <%= a.getStatus().toUpperCase().replace('_', ' ') %>
+</td>
+
               <td>
                   
                 <form action="${pageContext.request.contextPath}/ResponderSolicitudServlet" method="post">
                   <input type="hidden" name="idAsesoria" value="<%= a.getIdAsesoria() %>" />
                   <select name="status" required>
-                    <option value="">Responder</option>
+                    <option value="">Seleccionar respuesta</option>
                     <option value="aceptada">Aceptar</option>
                     <option value="denegada">Denegar</option>
                   </select>

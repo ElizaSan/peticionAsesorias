@@ -16,13 +16,13 @@
             <input type="hidden" name="tipoUsuario" value="profesor" /> 
             
             <label for="idProfesor">ID Profesor:</label><br/>
-            <input type="text" id="idProfesor" name="idProfesor" required /><br/><br/>
+            <input type="text" id="idProfesor" name="idProfesor" size="9" maxlength="9" pattern="\d{9}" inputmode="numeric" required /><br/><br/>
             
             <label for="nombreCompleto">Nombre completo:</label><br/>
-            <input type="text" id="nombreCompleto" name="nombreCompleto" required /><br/><br/>
+            <input type="text" id="nombreCompleto" name="nombreCompleto" maxlength="50" required /><br/><br/>
 
             <label for="password">Contraseña:</label><br/>
-            <input type="password" id="password" name="password" required /><br/><br/>
+            <input type="password" id="password" name="password" maxlength="20" required /><br/><br/>
 
             <button type="submit">Registrarme</button>
         </form>

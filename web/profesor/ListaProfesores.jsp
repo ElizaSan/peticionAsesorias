@@ -1,24 +1,31 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Profesor" %>
 <%@ page import="model.DAO.ProfesorDAO" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ProfesorDAO profesorDAO = new ProfesorDAO();
+    List<Profesor> profesores = null;
+    try {
+        profesores = profesorDAO.getAllProfesores();
+    } catch (Exception e) {
+        out.println("<p>Error al obtener los profesores: " + e.getMessage() + "</p>");
+    }
 %>
 
-        
 <label for="idProfesor">Profesor:</label><br/>
+
 <%
-    List<Profesor> profesores = profesorDAO.getAllProfesores();
     if (profesores != null && !profesores.isEmpty()) {
 %>
-<select name="idProfesor" id="idProfesor">
-    <% for (Profesor p : profesores) { %>
-    <option value="<%=p.getIdProfesor()%>">
-        <%= p.getNombreCompleto() %>
-        </option>
-    <% } %>
+    <select name="idProfesor" id="idProfesor">
+    <%
+        for (Profesor p : profesores) {
+    %>
+            <option value="<%= p.getIdProfesor() %>"><%= p.getNombreCompleto() %></option>
+    <%
+        }
+    %>
     </select>
 <%
     } else {
@@ -27,5 +34,4 @@
 <%
     }
 %>
-<br>
-<br>
+<br><br>

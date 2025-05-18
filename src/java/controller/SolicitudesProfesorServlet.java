@@ -36,6 +36,7 @@ public class SolicitudesProfesorServlet extends HttpServlet {
 
         Profesor profesor = (Profesor) session.getAttribute("usuario");
         try {
+            
             List<Asesoria> lista = asesoriaDAO.getAsesoriasByProfesor(profesor.getIdProfesor());
             request.setAttribute("listaSolicitudes", lista);
             request.getRequestDispatcher("/profesor/solicitudes.jsp").forward(request, response);

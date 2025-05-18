@@ -12,8 +12,8 @@
     session = request.getSession();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
     String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
-    AsesoriaDAO asesoriasDAO = new AsesoriaDAO() ; 
-    List<Asesoria> lista = new AsesoriaDAO().getAsesoriasByAlumno(identificador) ;
+    AsesoriaDAO asesoriasDAO = new AsesoriaDAO(); 
+    List<Asesoria> lista = new AsesoriaDAO().getAsesoriasByAlumno(identificador);
 %>
 
 <!DOCTYPE html>
