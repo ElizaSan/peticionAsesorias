@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.List" %>
 <%@ page import="model.Asesoria" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
@@ -25,17 +26,15 @@
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
-
-        <h2>Mis Solicitudes</h2>
-        
-               <%
+      
+        <%
             // Verificar si el usuario ha iniciado sesión
             if (identificador == null || tipoUsuario == null) {
         %>
             <!-- Si no ha iniciado sesión, mostrar el mensaje de inicio de sesión o registro -->
-            <p><strong>Debes iniciar sesión para ver tus solicitudes.</strong></p>
-            <a href="<%= request.getContextPath() %>/login.jsp">Iniciar sesión</a> | 
-            <a href="<%= request.getContextPath() %>/registro.jsp">Registrarse</a>
+            
+            <h3>Debes iniciar sesión para ver tus solicitudes.</h3>
+            
         <% 
             } else {
         %>
@@ -43,6 +42,8 @@
         
         
         <!-- Si está logueado, mostrar la tabla de solicitudes -->
+        <h2>Mis Solicitudes</h2>
+        
             <a href="formSolicitud.jsp">Nueva Solicitud</a> |
             <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
             
