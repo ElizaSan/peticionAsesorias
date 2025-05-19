@@ -15,7 +15,6 @@
         
         <h1>Registro de Alumno</h1>
         
-
         <form action="${pageContext.request.contextPath}/RegistroServlet" method="post" >
             
             <input type="hidden" name="tipoUsuario" value="alumno" />

@@ -13,7 +13,7 @@
     
     //El paso que no salia ya quedo
     AsesoriaDAO asesoriasDAO = new AsesoriaDAO(); 
-    List<Asesoria> lista = asesoriasDAO.getAsesoriasByAlumno(identificador);
+    
 
 %>
 
@@ -24,13 +24,13 @@
         <title>Mis solicitudes</title>
         <link rel="stylesheet" href="../css/styles.css" />
     </head>    
+    
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
         
         <%
             AsignaturaDAO asignaturaDAO = new AsignaturaDAO();
-
             String nombre = (String) session.getAttribute("nombre");
         %>
         
@@ -39,12 +39,11 @@
             // Verificar si el usuario ha iniciado sesión
             if (identificador == null || tipoUsuario == null) {
         %>
-            <!-- Si no ha iniciado sesión, mostrar el mensaje de inicio de sesión o registro -->
             <h3>Debes iniciar sesión para ver tus solicitudes.</h3>
         <% 
             } else {
         %>
-        <!-- Si está logueado, mostrar la tabla de solicitudes -->
+       
         <h2>Mis Solicitudes</h2>
         
             <table border="1" cellpadding="5" cellspacing="0">
@@ -60,6 +59,7 @@
                     </tr>
                 </thead>
                 <%
+                    List<Asesoria> lista = asesoriasDAO.getAsesoriasByAlumno(identificador);
                     if (lista != null && !lista.isEmpty()) {
                         for (Asesoria a : lista) {
                 %>
@@ -88,7 +88,7 @@
                         }
                     } else {
                 %>
-                    <tr><td colspan="7">No tienes solicitudes registradas.</td></tr>
+                        <tr><td colspan="7">No tienes solicitudes registradas.</td></tr>
                 <%
                     }
                 %>
@@ -97,7 +97,6 @@
             }
         %>
         <br><br><a href="formSolicitud.jsp">Nueva Solicitud</a>
-        
 
         <jsp:include page="../common/footer.jsp" />
 

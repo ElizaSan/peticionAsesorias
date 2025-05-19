@@ -40,7 +40,7 @@ public class AlumnoDAO {
         return null;
     }
 
-    // Listar todos los alumnos (opcional)
+    // Listar todos los alumnos
     public List<Alumno> getAllAlumnos() throws SQLException {
         List<Alumno> alumnos = new ArrayList<>();
         String sql = "SELECT * FROM Alumno";

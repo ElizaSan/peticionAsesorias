@@ -25,11 +25,10 @@
             <label>Matrícula o ID Profesor:</label><br/>
             <input type="text" name="identificador" maxlength="9" required /><br/><br/>
 
-
-             <label for="password">Contraseña:</label><br/>           
+            <label for="password">Contraseña:</label><br/>           
             <div class="password-container">
-            <input type="password" id="password" name="password" maxlength="20" autocomplete="off" required />          
-            <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
+                <input type="password" id="password" name="password" maxlength="20" autocomplete="off" required />          
+                <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
             </div><br/><br/> 
 
             <button type="submit">Ingresar</button>

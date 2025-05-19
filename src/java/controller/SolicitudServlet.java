@@ -2,41 +2,31 @@ package controller;
 
 import model.Asesoria;
 import model.DAO.AsesoriaDAO;
-import model.DAO.AsignaturaDAO;
-import model.DAO.ProfesorDAO;
-import model.Asignatura;
-import model.Profesor;
 
-import java.util.List;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
+
 
 public class SolicitudServlet extends HttpServlet {
 
     private AsesoriaDAO asesoriaDAO;
-    private AsignaturaDAO asignaturaDAO;
-    private ProfesorDAO profesorDAO;
+
 
     @Override
     public void init() throws ServletException {
         super.init();
         asesoriaDAO = new AsesoriaDAO();
-        asignaturaDAO = new AsignaturaDAO();
-        profesorDAO = new ProfesorDAO();
     }
-
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 
-        // Obtener parámetros del formulario
+        // Obtener parámetros de asesoría
         String nombreCompleto = request.getParameter("nombreCompleto");
         String programaEducativo = request.getParameter("programaEducativo");
         String matricula = request.getParameter("matricula");
@@ -47,11 +37,7 @@ public class SolicitudServlet extends HttpServlet {
         String hora = request.getParameter("hora");
         String asunto = request.getParameter("asunto");
         
-
-        
-
         Asesoria asesoria = new Asesoria();
-        
         
         asesoria.setMatricula(matricula);          
         asesoria.setIdProfesor(Integer.parseInt(idProfesor));
@@ -63,9 +49,6 @@ public class SolicitudServlet extends HttpServlet {
         asesoria.setStatus("en_proceso");
         asesoria.setComentarioProfesor(null);
         
-        
-        
-
         try {
             asesoriaDAO.insertAsesoria(asesoria);
 

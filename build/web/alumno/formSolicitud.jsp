@@ -9,8 +9,7 @@
     
 
 <%
-    // Obtener la sesión
-    
+    // Obtener la sesión 
     session = request.getSession();
     java.time.LocalDate hoy = java.time.LocalDate.now();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
@@ -31,22 +30,17 @@
        
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
-        
-        
-        
+
         <%
             // Verificar si el usuario ha iniciado sesión
             if (identificador == null || tipoUsuario == null) {
         %>
             <!-- Si no ha iniciado sesión, mostrar el mensaje de inicio de sesión o registro -->
-            <h3>Debes iniciar sesión para llenar una solicitud.</h3>
-            
+            <h3>Debes iniciar sesión para llenar una solicitud.</h3>            
         <% 
             } else {
         %>
-        
-            
-        
+
             <!-- Mostrar el formulario de solicitud -->
             <h1>Formato de solicitud de asesoría</h1>
             
@@ -85,12 +79,6 @@
             } 
         %>
 
-        
-     
-        
-        
-        
-        
         <jsp:include page="../common/footer.jsp" />
 
     </body>

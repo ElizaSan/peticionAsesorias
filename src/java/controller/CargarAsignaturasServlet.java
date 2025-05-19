@@ -40,7 +40,7 @@ public class CargarAsignaturasServlet extends HttpServlet {
                 request.getRequestDispatcher("/error.jsp").forward(request, response); // Redirige a una página de error
             }
                
-             int idAsignatura = 1;  // valor predeterminado si no se selecciona ninguna asignatura 
+            int idAsignatura = 1;  // valor predeterminado si no se selecciona ninguna asignatura 
              
             String idAsignaturaStr = request.getParameter("idAsignatura");
             if (idAsignaturaStr != null && !idAsignaturaStr.isEmpty()) {
