@@ -24,16 +24,20 @@
 
     <div class="contenido">
         <div class="bienvenida">
-            <h2>Bienvenido</h2>
+            <img src="https://www.cs.buap.mx/img/logo_fcc.png" >
+            <h1>Bienvenido</h1>
             <p>Este sistema permite a los estudiantes de la Facultad de Ciencias de la Computación gestionar solicitudes de asesoría académica con sus profesores. Los alumnos pueden registrar sus peticiones, consultar su estado y recibir retroalimentación directa.</p>
         </div>
 
         <aside class="anuncios">
             <h3>Anuncios</h3>
             <p>Consulta las actividades recientes de la universidad.</p>
-            <a href="https://www.cs.buap.mx/asamblea2025.php" target="_blank">
-                Mesa de Diálogo 2025
-            </a>
+            <ul>
+                <li><a href="https://www.cs.buap.mx/asamblea2025.php" target="_blank">Mesa de Diálogo 2025</a></li>
+                <li><a href="https://www.facebook.com/VinculandoteFcc" target="_blank">Síquenos a traves de Facebook en Vinculación FCC - BUAP</a></li>
+                
+            </ul>
+            
         </aside>
     </div>
 

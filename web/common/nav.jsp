@@ -5,8 +5,9 @@
     String identificador = (String) session.getAttribute("identificador");
 %>
 
-
-    <nav>       
+    
+    <nav>
+        
         <ul>
             <li><a href="${pageContext.request.contextPath}/">Inicio</a></li>
 

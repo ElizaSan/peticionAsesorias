@@ -2,6 +2,7 @@
 <footer>
     <div>
         <h3>Enlaces externos | Canales oficiales BUAP </h3>
+        
         <ul>
             <li><a href="https://www.buap.mx/" target="_blank">Página de inicio BUAP</a></li>
             <li><a href="https://www.cs.buap.mx/" target="_blank">Página de inicio FCC</a></li>
