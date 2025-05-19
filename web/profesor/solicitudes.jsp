@@ -5,6 +5,16 @@
 <%@ page import="model.DAO.AsesoriaDAO" %>
 <%@ page import="model.DAO.AlumnoDAO" %>
 <%@ page import="model.Alumno" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+
+<%
+    LocalDate fechaHoy = LocalDate.now();
+    LocalTime horaActual = LocalTime.now();
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+%>
 
 
 
@@ -90,19 +100,37 @@
 </td>
 
               <td>
-                  
-                <form action="${pageContext.request.contextPath}/ResponderSolicitudServlet" method="post">
-                  <input type="hidden" name="idAsesoria" value="<%= a.getIdAsesoria() %>" />
-                  <select name="status" required>
-                    <option value="">Seleccionar respuesta</option>
-                    <option value="aceptada">Aceptar</option>
-                    <option value="denegada">Denegar</option>
-                  </select>
-                  <br/>
-                  <textarea name="comentario" rows="2" cols="20" placeholder="Comentario..." required></textarea><br/>
-                  <button type="submit">Enviar</button>
-                </form>
-              </td>
+  <%
+    LocalDate fechaAsesoria = LocalDate.parse(a.getFecha(), formatoFecha);
+    LocalTime horaAsesoria = LocalTime.parse(a.getHora(), formatoHora);
+
+    boolean vencida = false;
+    if (fechaAsesoria.isBefore(fechaHoy)) {
+        vencida = true;
+    } else if (fechaAsesoria.isEqual(fechaHoy) && horaAsesoria.isBefore(horaActual)) {
+        vencida = true;
+    }
+
+    if (vencida) {
+  %>
+      <p style="color:gray;">No se puede cambiar el estado</p>
+  <%
+    } else {
+  %>
+      <form action="${pageContext.request.contextPath}/ResponderSolicitudServlet" method="post">
+        <input type="hidden" name="idAsesoria" value="<%= a.getIdAsesoria() %>" />
+        <select name="status" required>
+          <option value="">Seleccionar respuesta</option>
+          <option value="aceptada">Aceptar</option>
+          <option value="denegada">Denegar</option>
+        </select><br/>
+        <textarea name="comentario" rows="2" cols="20" placeholder="Comentario..." required></textarea><br/>
+        <button type="submit">Enviar</button>
+      </form>
+  <%
+    }
+  %>
+</td>
             </tr>
           <%
               }

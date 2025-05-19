@@ -3,11 +3,16 @@
 <%@ page import="model.Asignatura" %>
 <%@ page import="model.Profesor" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+    
 
 <%
     // Obtener la sesión
     
     session = request.getSession();
+    java.time.LocalDate hoy = java.time.LocalDate.now();
     String tipoUsuario = (String) session.getAttribute("tipoUsuario");  // Obtener el tipo de usuario
     String identificador = (String) session.getAttribute("identificador"); // Obtener el identificador (matrícula o idProfesor)
     String nombreCompleto = (String) session.getAttribute("nombreCompleto"); // Obtener el nombre del alumno
@@ -65,7 +70,7 @@
                 <jsp:include page="../profesor/ListaAsignaturas.jsp" />
                 
                 <label>Fecha de la asesoría:</label><br/>
-                <input type="date" name="fecha" required /><br/><br/>
+                <input type="date" name="fecha" required min="<%= hoy%>" /><br/><br/>
 
                 <label>Hora de la asesoría:</label><br/>
                 <input type="time" name="hora" required /><br/><br/>
