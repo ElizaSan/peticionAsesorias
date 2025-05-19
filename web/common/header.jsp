@@ -22,7 +22,7 @@
                 <% if ("alumno".equalsIgnoreCase(tipoUsuario)) { %>
                     <p><strong>Matrícula:</strong> <%= identificador %></p>
                 <% } else if ("profesor".equalsIgnoreCase(tipoUsuario)) { %>
-                    <p><strong>ID Profesor:</strong> <%= identificador %></p>
+                    <p><strong>ID Profesor:</strong> <%= identificador %> </p>
                 <% } %>
                 <p><strong>Sesión iniciada</strong></p>
             </div>

@@ -27,8 +27,7 @@
 
             <label for="password">Contraseña:</label><br/>           
             <div class="password-container">
-            <input type="password" id="password" name="password" maxlength="20" autocomplete="off" pattern=".{8,}"
-            title="La contraseña debe tener al menos 8 caracteres"required />          
+                <input type="password" id="password" name="password" maxlength="20" autocomplete="off" required=""/>          
             <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
             </div>
             

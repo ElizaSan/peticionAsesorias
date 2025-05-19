@@ -1,10 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Asesoria" %>
+<%@ page import="model.DAO.AsesoriaDAO" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="model.DAO.AsesoriaDAO" %>
 <%@ page import="model.DAO.AlumnoDAO" %>
 <%@ page import="model.Alumno" %>
+<%@ page import="model.DAO.AsignaturaDAO" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
@@ -37,12 +39,16 @@
     <body>
         <jsp:include page="../common/header.jsp" />
         <jsp:include page="../common/nav.jsp" />
-    <%
-        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        <%
+            AlumnoDAO alumnoDAO = new AlumnoDAO();
+            String nombreCompleto = (String) session.getAttribute("nombreCompleto");
+            
+            AsignaturaDAO asignaturaDAO = new AsignaturaDAO();
+            String nombre = (String) session.getAttribute("nombre");
         
-        String nombreCompleto = (String) session.getAttribute("nombreCompleto");
-    %>
-        <p><%= nombreCompleto%></p>
+        %>
+        
+        <p>Bienvenido <strong><%= nombreCompleto%><strong></p>
               
         
         
@@ -68,8 +74,8 @@
             <th>Matrícula del alumno</th>
             <th>Nombre completo</th>
             <th>Asignatura</th>
-            <th>Fecha</th>
-            <th>Hora</th>
+            <th>Fecha programada de asesoría (YYYY-MM-DD)</th>
+            <th>Hora (24h)</th>
             <th>Asunto</th>
             <th>Es alumno suyo</th>
             <th>Estado</th>
@@ -85,7 +91,8 @@
               <td><%= a.getMatricula() %></td>
               <td><%= alumnoDAO.getAlumnoByMatricula(a.getMatricula()).getNombreCompleto()
                   %></td>
-              <td><%= a.getIdAsignatura() %></td>
+              <td><%= asignaturaDAO.getAsignaturaById(a.getIdAsignatura()).getNombre()%></td>
+              
               <td><%= a.getFecha() %></td>
               <td><%= a.getHora() %></td>
               <td><%= a.getAsunto() %></td>
@@ -142,7 +149,7 @@
           %>
         </table>
 
-        <a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar sesión</a>
+       
 
         <jsp:include page="../common/footer.jsp" />
     <% } %>

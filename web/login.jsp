@@ -16,24 +16,23 @@
         <h1>Ingresar</h1>
 
         <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
-          <label>Tipo de Usuario:</label><br/>
-          <input type="radio" id="alumno" name="tipoUsuario" value="alumno" checked />
-          <label for="alumno">Alumno</label>
-          <input type="radio" id="profesor" name="tipoUsuario" value="profesor" />
-          <label for="profesor">Profesor</label><br/><br/>
+            <label>Tipo de Usuario:</label><br/>
+            <input type="radio" id="alumno" name="tipoUsuario" value="alumno" checked />
+            <label for="alumno">Alumno</label>
+            <input type="radio" id="profesor" name="tipoUsuario" value="profesor" />
+            <label for="profesor">Profesor</label><br/><br/>
 
-          <label>Matrícula o ID Profesor:</label><br/>
-          <input type="text" name="identificador" required /><br/><br/>
-          
+            <label>Matrícula o ID Profesor:</label><br/>
+            <input type="text" name="identificador" maxlength="9" required /><br/><br/>
 
-          <label for="password">Contraseña:</label><br/>           
+
+             <label for="password">Contraseña:</label><br/>           
             <div class="password-container">
-            <input type="password" id="password" name="password" maxlength="20" autocomplete="off" pattern=".{8,}"
-            title="La contraseña debe tener al menos 8 caracteres"required />          
+            <input type="password" id="password" name="password" maxlength="20" autocomplete="off" required />          
             <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
-            </div>
+            </div><br/><br/> 
 
-          <button type="submit">Ingresar</button>
+            <button type="submit">Ingresar</button>
         </form>
 
         <jsp:include page="/common/footer.jsp" />

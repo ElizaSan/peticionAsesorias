@@ -73,10 +73,10 @@
                 <input type="date" name="fecha" required min="<%= hoy%>" /><br/><br/>
 
                 <label>Hora de la asesoría:</label><br/>
-                <input type="time" name="hora" required /><br/><br/>
+                <input type="time" name="hora" min="07:00" max="22:00" required /><br/><br/>
 
                 <label>Asunto:</label><br/>
-                <textarea name="asunto" rows="3" cols="40"></textarea><br/><br/>
+                <textarea name="asunto" rows="3" cols="40" required></textarea><br/><br/>
 
                 <button type="submit">Enviar Solicitud</button>
             </form>

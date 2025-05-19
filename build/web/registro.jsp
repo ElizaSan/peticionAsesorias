@@ -20,11 +20,11 @@
                 <div>
                     <!-- Botón para Alumno -->
                     <a href="${pageContext.request.contextPath}/alumno/registroAlumno.jsp">
-                        <button type="button">Soy alumno</button>
+                        <button type="button">Soy alumno</button><br><br>
                     </a>
 
                     <!-- Botón para Profesor -->
-                    <a href="profesor/registroProfesor.jsp">
+                    <a href="${pageContext.request.contextPath}/profesor/registroProfesor.jsp">
                         <button type="button">Soy profesor</button>
                     </a>
                 </div>

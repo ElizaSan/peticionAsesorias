@@ -31,4 +31,29 @@ public class AsignaturaDAO {
 
         return asignaturas;
     }
+    
+    
+    public Asignatura getAsignaturaById(int idAsignatura) throws SQLException {
+        String sql = "SELECT * FROM Asignatura WHERE idAsignatura = ?";
+        try (Connection conn = ConexionBD.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idAsignatura);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Asignatura asignatura = new Asignatura();
+                asignatura.setIdAsignatura(rs.getInt("idAsignatura"));
+                asignatura.setNombre(rs.getString("nombre"));
+                asignatura.setProgramaEducativo(rs.getString("programaEducativo"));
+                return asignatura;
+            }
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
+    
+    
 }
