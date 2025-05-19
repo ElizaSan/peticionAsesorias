@@ -1,0 +1,45 @@
+article {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #002244;
+    margin-top: 40px;
+}
+
+section h2 {
+    color: #002244;
+    margin-bottom: 30px;
+}
+
+section div {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+section a button {
+    padding: 12px 24px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+section a button:hover {
+    background-color: #002244;
+}
+
+

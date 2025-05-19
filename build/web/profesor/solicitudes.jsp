@@ -32,6 +32,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Solicitudes del profesor</title>
         <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="stylesheet" href="../css/header.css" />
+        <link rel="stylesheet" href="../css/nav.css" />
+        <link rel="stylesheet" href="../css/footer.css" />
+        <link rel="stylesheet" href="../css/solicitudes_profesor.css" />
     </head>
     
     <body>
@@ -44,8 +48,9 @@
             AsignaturaDAO asignaturaDAO = new AsignaturaDAO();
             String nombre = (String) session.getAttribute("nombre");        
         %>
-        
-        <p>Bienvenido <strong><%= nombreCompleto%><strong></p>
+
+        <p>Bienvenido <strong><%= nombreCompleto %></strong></p>
+            
                             
         <%
             // Verificar si el usuario ha iniciado sesión

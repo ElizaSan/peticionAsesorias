@@ -1,9 +1,31 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : May 17, 2025, 2:05:24 PM
-    Author     : mimas
-*/
+header {
+    background-color: #003366; /* azul institucional */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 4px solid #002244;
+}
 
+header h1 {
+    margin: 10px;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #f5f5dc;
+}
+
+header div {
+    margin-top: 0px;
+    background-color: #004080;
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-block;
+    float: right;
+    color: white;
+    text-align: right;
+}
+
+header p {
+    margin: 5px 0;
+    font-size: 14px;
+    text-align: right;
+}

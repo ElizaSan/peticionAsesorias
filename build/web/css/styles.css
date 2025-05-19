@@ -1,52 +1,44 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0; padding: 0;
+ 
+.contenido {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 30px auto;
+    gap: 40px;
 }
 
-header, nav, article, section, aside, footer {
-  padding: 10px;
-  margin: 10px;
-  border: 1px solid #ccc;
+.bienvenida {
+    flex: 2;
 }
 
-nav ul {
-  list-style-type: none;
-  padding: 0;
+.bienvenida h2 {
+    margin-top: 0;
+    color: #002244;
 }
 
-nav ul li {
-  display: inline-block;
-  margin-right: 15px;
+.anuncios {
+    flex: 1;
+    background-color: #f0f0f0;
+    border-left: 4px solid #004080;
+    padding: 15px;
+    border-radius: 5px;
 }
 
-nav ul li a {
-  text-decoration: none;
-  color: #333;
+.anuncios h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #002244;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.8em;
-  color: #666;
+.anuncios a {
+    display: block;
+    margin-top: 10px;
+    color: #004080;
+    text-decoration: none;
 }
 
-
-
-  .password-container {
-    position: relative;
-    display: inline-block;
-  }
-
-  .password-container input[type="password"],
-  .password-container input[type="text"] {
-    padding-right: 30px; /* espacio para el icono */
-  }
-
-  .password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #333;
-  }
+.anuncios a:hover {
+    text-decoration: underline;
+}
